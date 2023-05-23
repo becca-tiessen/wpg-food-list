@@ -1,8 +1,24 @@
 import React from "react";
-import {Container, List, ListItem, ListItemText, Rating} from '@mui/material';
-import NavMenu from './components/NavMenu.tsx'
+import {Button, Container, List, ListItem, ListItemText, Rating} from '@mui/material';
+import NavMenu from './components/NavMenu.tsx';
+import VoteDialog from './components/VoteDialog.tsx';
 
-const App = () =>{
+const emails = ['username@gmail.com', 'user02@gmail.com'];
+
+const App = () => {
+    const factors = ['value', 'vibes', 'flavour']
+    const [open, setOpen] = React.useState(false);
+    const [selectedValue, setSelectedValue] = React.useState(emails[1]);
+
+    const handleVote = () => {
+     setOpen(true);
+    };
+
+    const handleClose = (value) => {
+        setOpen(false);
+        setSelectedValue(value);
+    };
+
     return (
         <>
         <NavMenu>
@@ -13,7 +29,15 @@ const App = () =>{
             <List>
             <ListItem disablePadding>
                 <ListItemText primary="Deer + Almond" />
-                <Rating name="half-rating" value={5.0} precision={0.5} />
+                <Button variant="outlined" onClick={handleVote}>
+                    Vote
+                </Button>
+                <VoteDialog
+                    selectedValue={selectedValue}
+                    open={open}
+                    onClose={handleClose}
+                    factors={factors}
+                />
             </ListItem>
             <ListItem disablePadding>
                 <ListItemText primary="Sous Sol" />
