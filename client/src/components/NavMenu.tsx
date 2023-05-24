@@ -17,6 +17,8 @@ import CakeIcon from '@mui/icons-material/Cake';
 const drawerWidth = 240;
 
 export default function ClippedDrawer(props) {
+  const categories = ['Fine Dining', 'Casual Dining', 'Desserts', 'Cafes', 'Bakeries', 'Bars'];
+
   return (
     <Box sx={{ flexgrow: 1 }}>
       <CssBaseline />
@@ -39,7 +41,7 @@ export default function ClippedDrawer(props) {
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
           <List>
-            {['Restaurants', 'Desserts', 'Coffee', 'Bakeries'].map((text, index) => (
+            {categories.map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>

@@ -13,17 +13,21 @@ import {
 
 export interface VoteDialogProps {
   open: boolean;
-  selectedValue: string;
-  onClose: (value: string) => void;
+  onClose: () => void;
   factors: Array<string>;
 }
 
 export default function VoteDialog(props: VoteDialogProps) {
-  const { onClose, selectedValue, open, factors } = props;
+  const { onClose, open, factors } = props;
 
   const handleClose = () => {
-    onClose(selectedValue);
+    onClose();
   };
+
+  const handleSubmit = () => {
+    alert('submitted rating!');
+    handleClose();
+  }
 
   return (
     <Dialog onClose={handleClose} open={open}>
@@ -33,14 +37,14 @@ export default function VoteDialog(props: VoteDialogProps) {
             {factors.map(f => (
                 <ListItem>
                     <ListItemText>{f}</ListItemText>
-                    <Rating name="half-rating" value={4.5} precision={0.5} />
+                    <Rating name="half-rating" value={null}/>
                 </ListItem>
             ))}
         </List>
       </DialogContent>
       <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Submit rating</Button>
+          <Button onClick={handleSubmit}>Submit rating</Button>
         </DialogActions>
     </Dialog>
   );

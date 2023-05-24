@@ -7,7 +7,7 @@ import (
 	"github.com/go-kit/kit/endpoint"
 )
 
-func MakeCreateListingEndpoint(svc Service) endpoint.Endpoint {
+func MakeSubmitVoteEndpoint(svc Service) endpoint.Endpoint {
 	return func(_ context.Context, request interface{}) (interface{}, error) {
 		req, ok := request.(submitVoteRequest)
 		if !ok {
