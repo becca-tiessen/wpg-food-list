@@ -18,22 +18,30 @@ func main() {
 	}
 	defer db.Close()
 
-	repo := app.NewRepo(db)
+	vRepo := app.NewVoteRepo(db)
+	rRepo := app.NewRestaurantRepo(db)
 
-	svc := app.NewService(repo)
+	svc := app.NewService(vRepo, rRepo)
 
 	voteHandler := httptransport.NewServer(
 		app.MakeSubmitVoteEndpoint(svc),
-		decodeSubmitVoteRequest,
+		decodeRequest,
+		encodeResponse,
+	)
+
+	restaurantHandler := httptransport.NewServer(
+		app.MakeGetTopRestaurantEndpoint(svc),
+		decodeRequest,
 		encodeResponse,
 	)
 
 	http.Handle("/vote", voteHandler)
+	http.Handle("/restaurants", restaurantHandler)
 
 	http.ListenAndServe(":8080", nil)
 }
 
-func decodeSubmitVoteRequest(_ context.Context, r *http.Request) (interface{}, error) {
+func decodeRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	return r, nil
 }
 

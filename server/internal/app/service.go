@@ -2,17 +2,25 @@ package app
 
 type Service interface {
 	SubmitVote(v Vote) (err error)
+	GetTopRestaurants() ([]Restaurant, error)
 }
 
 type service struct {
-	repo Repo
+	voteRepo       VoteRepo
+	restaurantRepo RestaurantRepo
 }
 
-func NewService(repo Repo) Service {
+func NewService(voteRepo VoteRepo, restaurantRepo RestaurantRepo) Service {
 	return &service{
-		repo: repo,
+		voteRepo:       voteRepo,
+		restaurantRepo: restaurantRepo,
 	}
 }
+
 func (s *service) SubmitVote(v Vote) error {
-	return s.repo.SubmitVote(v)
+	return s.voteRepo.SubmitVote(v)
+}
+
+func (s *service) GetTopRestaurants() ([]Restaurant, error) {
+	return s.restaurantRepo.GetTopRestaurants()
 }

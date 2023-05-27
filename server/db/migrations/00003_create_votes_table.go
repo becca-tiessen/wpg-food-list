@@ -2,7 +2,8 @@ package migrations
 
 import (
 	"database/sql"
-	"github.com/pressly/goose/v3"
+
+	goose "github.com/pressly/goose/v3"
 )
 
 func init() {
@@ -10,7 +11,7 @@ func init() {
 }
 
 func upCreateVotesTable(tx *sql.Tx) error {
-	sq := "CREATE TABLE IF NOT EXISTS votes (
+	sq := `CREATE TABLE IF NOT EXISTS votes (
 		id INT AUTO_INCREMENT PRIMARY KEY,
 		user_id INT NOT NULL,
 		restaurant_id INT NOT NULL,
@@ -18,11 +19,11 @@ func upCreateVotesTable(tx *sql.Tx) error {
 		factor_rating INT NOT NULL,
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 		updated_at TIMESTAMP
-	)ENGINE=INNODB;"
+	)ENGINE=INNODB;`
 
-	err := tx.Exec(sq)
+	_, err := tx.Exec(sq, nil)
 	if err != nil {
-		return err 
+		return err
 	}
 	// This code is executed when the migration is applied.
 	return nil
@@ -30,10 +31,10 @@ func upCreateVotesTable(tx *sql.Tx) error {
 
 func downCreateVotesTable(tx *sql.Tx) error {
 	sq := "DROP TABLE votes;"
-	
-	err := tx.Exec(sq)
+
+	_, err := tx.Exec(sq)
 	if err != nil {
-		return err 
+		return err
 	}
 	// This code is executed when the migration is rolled back.
 	return nil

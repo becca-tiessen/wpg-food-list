@@ -22,6 +22,21 @@ func MakeSubmitVoteEndpoint(svc Service) endpoint.Endpoint {
 	}
 }
 
+// instead of this, maybe GetBestOf(category) and then pass in 'alltime', 'brunch', 'dessert', 'pizza'
+func MakeGetTopRestaurantEndpoint(svc Service) endpoint.Endpoint {
+	return func(_ context.Context, request interface{}) (interface{}, error) {
+		restaurants, err := svc.GetTopRestaurants()
+		if err != nil {
+			return nil, err
+		}
+		return getTopRestaurantsResponse{restaurants}, nil
+	}
+}
+
+type getTopRestaurantsResponse struct {
+	Restaurants []Restaurant `json:"restaurants"`
+}
+
 type submitVoteRequest struct {
 	Vote Vote `json:"vote"`
 }

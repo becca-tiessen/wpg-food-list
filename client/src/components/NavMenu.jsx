@@ -16,7 +16,7 @@ import CakeIcon from '@mui/icons-material/Cake';
 
 const drawerWidth = 240;
 
-export default function ClippedDrawer(props) {
+export default function NavMenu(props) {
   const categories = ['Fine Dining', 'Casual Dining', 'Desserts', 'Cafes', 'Bakeries', 'Bars'];
 
   return (

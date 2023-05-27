@@ -3,7 +3,7 @@ package migrations
 import (
 	"database/sql"
 
-	"github.com/pressly/goose/v3"
+	goose "github.com/pressly/goose/v3"
 )
 
 func init() {
@@ -11,19 +11,18 @@ func init() {
 }
 
 func upCreateRestaurantTable(tx *sql.Tx) error {
-	
-	sq := "CREATE TABLE IF NOT EXISTS restaurants (
+	sq := `CREATE TABLE IF NOT EXISTS restaurants (
 		id INT AUTO_INCREMENT PRIMARY KEY,
 		name VARCHAR(255) COLLATE utf8_unicode_ci,
 		description TEXT COLLATE utf8_unicode_ci,
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 		updated_at DATETIME DEFAULT CURRENT_TIMESTAMP, 
 		deleted_at DATETIME DEFAULT NULL
-	)ENGINE=INNODB;"
+	)ENGINE=INNODB;`
 
-	err := tx.Exec(sq)
+	_, err := tx.Exec(sq)
 	if err != nil {
-		return err 
+		return err
 	}
 	// This code is executed when the migration is applied.
 	return nil
@@ -32,9 +31,9 @@ func upCreateRestaurantTable(tx *sql.Tx) error {
 func downCreateRestaurantTable(tx *sql.Tx) error {
 	sq := "DROP TABLE restaurants;"
 
-	err := tx.Exec(sq)
+	_, err := tx.Exec(sq)
 	if err != nil {
-		return err 
+		return err
 	}
 	// This code is executed when the migration is rolled back.
 	return nil

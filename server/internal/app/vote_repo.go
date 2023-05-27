@@ -10,21 +10,21 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-type Repo interface {
+type VoteRepo interface {
 	SubmitVote(v Vote) error
 }
 
-type repo struct {
+type voteRepo struct {
 	db *sqlx.DB
 }
 
-func NewRepo(db *sqlx.DB) Repo {
-	return &repo{db: db}
+func NewVoteRepo(db *sqlx.DB) VoteRepo {
+	return &voteRepo{db: db}
 }
 
-func (r *repo) SubmitVote(v Vote) error {
+func (r *voteRepo) SubmitVote(v Vote) error {
 	now := time.Now()
-	sql, args, err := sq.Insert("Votes").
+	sql, args, err := sq.Insert("votes").
 		SetMap(sq.Eq{
 			"user_id":       v.UserID,
 			"restaurant_id": v.RestaurantID,
@@ -37,7 +37,7 @@ func (r *repo) SubmitVote(v Vote) error {
 		return errors.New("error building submit vote query")
 	}
 
-	_, err = r.db.Exec(sql, args...)
+	_, err = r.db.Exec(sql, args)
 	if err != nil {
 		return errors.New("error submitting vote")
 	}

@@ -11,13 +11,7 @@ import {
     ListItemText,
 } from '@mui/material';
 
-export interface VoteDialogProps {
-  open: boolean;
-  onClose: () => void;
-  factors: Array<string>;
-}
-
-export default function VoteDialog(props: VoteDialogProps) {
+export default function VoteDialog(props) {
   const { onClose, open, factors } = props;
 
   const handleClose = () => {
