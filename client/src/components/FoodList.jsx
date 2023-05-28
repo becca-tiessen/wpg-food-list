@@ -34,7 +34,7 @@ export default function FoodList() {
         return (
             //this will need to be its own component eventually
             <Stack justifyContent="center" spacing={3} direction="row" divider={<Divider orientation="vertical" flexItem />}>
-                <Box >value: <Rating size="small" value={5} readOnly/></Box>
+                <Box>value: <Rating size="small" value={5} readOnly/></Box>
                 <Box>vibes: <Rating precision={0.5} size="small" value={3.5} readOnly/></Box>
                 <Box>flaves: <Rating size="small" value={4} readOnly/></Box>
             </Stack>
