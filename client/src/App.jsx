@@ -1,5 +1,5 @@
 import React from "react";
-import {Container, ThemeProvider, createTheme} from '@mui/material';
+import {Container, Typography, ThemeProvider, createTheme} from '@mui/material';
 import { amber, deepOrange } from '@mui/material/colors';
 import NavMenu from './components/NavMenu';
 import FoodList from './components/FoodList';
@@ -24,9 +24,9 @@ const App = () => {
         <ThemeProvider theme={theme}>
         <NavMenu>
             <Container maxWidth="md">
-            <h1>
-                welcome to winnipeg's food list.
-            </h1>
+                <Typography variant="h4">
+                    welcome to winnipeg's food list.
+                </Typography>
             <FoodList/>
             </Container>
         </NavMenu>
