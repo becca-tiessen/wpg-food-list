@@ -22,5 +22,6 @@ func (r *restaurantRepo) GetTopRestaurants() ([]Restaurant, error) {
 	return []Restaurant{
 		{ID: 1, Name: "Sous Sol"},
 		{ID: 2, Name: "Deer + Almond"},
+		{ID: 3, Name: "Vera"},
 	}, nil
 }

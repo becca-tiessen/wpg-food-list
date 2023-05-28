@@ -7,7 +7,7 @@ const App = () => {
     return (
         <>
         <NavMenu>
-            <Container maxWidth="sm">
+            <Container maxWidth="md">
             <h1>
                 welcome to winnipeg's food list.
             </h1>

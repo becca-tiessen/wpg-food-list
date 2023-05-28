@@ -1,8 +1,9 @@
 package app
 
 type Restaurant struct {
-	ID   int64  `json:"id" db:"id"`
-	Name string `json:"name" db:"name"`
+	ID                 int64          `json:"id" db:"id"`
+	Name               string         `json:"name" db:"name"`
+	FactorVoteAverages map[string]int `json:"factor_vote_averages`
 }
 
 type User struct {
